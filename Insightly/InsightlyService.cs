@@ -18,26 +18,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
-using Flurl.Http;
-using System.Threading.Tasks;
-
 namespace Insightly
 {
-  public class InsightlyService
+  using System;
+  using System.Collections.Generic;
+  using Flurl.Http;
+  using System.Threading.Tasks;
+
+  public static class InsightlyService
   {
     private static Uri _apiUri = new Uri("https://api.insight.ly/v2.1");
 
-    public InsightlyService( string apiKey )
-    {
-      this.ApiKey = apiKey;
-    }
-
-    public string ApiKey { get; set; }
+    public static string ApiKey { private get; set; }
 
     #region Shared
-    protected virtual FlurlClient Authorise( string path )
+    private static FlurlClient Authorise( string path )
     {
       string request = _apiUri + path;
       return request.WithBasicAuth(ApiKey, "");
@@ -53,7 +48,7 @@ namespace Insightly
     //  return DoRequest(url, "GET", null);
     //}
 
-    protected virtual async Task<T> DoRequest<T>( string url, string method, object body )
+    private static async Task<T> DoRequest<T>( string url, string method, object body )
     {
       FlurlClient request = Authorise(url);
       T response = default(T);
@@ -77,14 +72,14 @@ namespace Insightly
     #endregion
 
     #region Contacts
-    public Task<Contact> CreateContactAsync( Contact contact )
+    public static Task<Contact> CreateContactAsync( Contact contact )
     {
       if( contact == null )
         throw new ArgumentNullException("contact");
       return DoRequest<Contact>("/Contacts", "POST", contact);
     }
 
-    public Task<IEnumerable<Contact>> GetContactsAsync( bool Brief = true )
+    public static Task<IEnumerable<Contact>> GetContactsAsync( bool Brief = true )
     {
       string url = "/Contacts";
       if( Brief )
@@ -94,7 +89,7 @@ namespace Insightly
     #endregion
 
     #region Organizations
-    public Task<IEnumerable<Organization>> GetOrganisationsAsync( bool Brief = true )
+    public static Task<IEnumerable<Organization>> GetOrganisationsAsync( bool Brief = true )
     {
       string url = "/Organisations";
       if( Brief )
