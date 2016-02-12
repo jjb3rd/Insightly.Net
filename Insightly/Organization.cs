@@ -1,8 +1,10 @@
 ﻿/*
- * Copyright 2014 Beckersoft, Inc.
+ * Started by Beckersoft, Inc.
+ * Extended by Razor Jam (razorjam.co.uk)
  *
  * Author(s):
  *  John Becker (john@beckersoft.com)
+ *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +20,10 @@
  */
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Insightly
 {
-    [JsonObject(MemberSerialization.OptIn)]
+  [JsonObject(MemberSerialization.OptIn)]
     public class Organization
     {
         [JsonProperty(PropertyName = "ORGANISATION_ID")]

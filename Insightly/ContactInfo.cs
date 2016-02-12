@@ -1,8 +1,10 @@
 ﻿/*
- * Copyright 2014 Beckersoft, Inc.
+ * Started by Beckersoft, Inc.
+ * Extended by Razor Jam (razorjam.co.uk)
  *
  * Author(s):
  *  John Becker (john@beckersoft.com)
+ *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,36 +19,31 @@
  * limitations under the License.
  */
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Insightly
 {
-    [JsonObject(MemberSerialization.OptIn)]
+  [JsonObject(MemberSerialization.OptIn)]
     public class ContactInfo
     {
-        [JsonProperty(PropertyName = "CONTACT_INFO_ID")]
+        [JsonProperty(PropertyName = "CONTACT_INFO_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? Id { get; set; }
 
         /// <summary>
         /// Required
         /// </summary>
-        [JsonProperty(PropertyName = "TYPE")]
+        [JsonProperty(PropertyName = "TYPE", NullValueHandling = NullValueHandling.Ignore)]
         public string ContactType { get; set; }
 
-        [JsonProperty(PropertyName = "SUBTYPE")]
+        [JsonProperty(PropertyName = "SUBTYPE", NullValueHandling = NullValueHandling.Ignore)]
         public string ContactSubtype { get; set; }
 
-        [JsonProperty(PropertyName = "LABEL")]
+        [JsonProperty(PropertyName = "LABEL", NullValueHandling = NullValueHandling.Ignore)]
         public string Label { get; set; }
 
         /// <summary>
         /// Required
         /// </summary>
-        [JsonProperty(PropertyName = "DETAIL")]
+        [JsonProperty(PropertyName = "DETAIL", NullValueHandling = NullValueHandling.Ignore)]
         public string Detail { get; set; }
     }
 }

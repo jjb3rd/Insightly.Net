@@ -1,8 +1,10 @@
 ﻿/*
- * Copyright 2014 Beckersoft, Inc.
+ * Started by Beckersoft, Inc.
+ * Extended by Razor Jam (razorjam.co.uk)
  *
  * Author(s):
  *  John Becker (john@beckersoft.com)
+ *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,42 +19,37 @@
  * limitations under the License.
  */
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Insightly
 {
-    [JsonObject(MemberSerialization.OptIn)]
+  [JsonObject(MemberSerialization.OptIn)]
     public class Link
     {
-        [JsonProperty(PropertyName = "LINK_ID")]
+        [JsonProperty(PropertyName = "LINK_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? Id { get; set; }
 
-        [JsonProperty(PropertyName = "CONTACT_ID")]
+        [JsonProperty(PropertyName = "CONTACT_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? ContactId { get; set; }
 
-        [JsonProperty(PropertyName = "OPPORTUNITY_ID")]
+        [JsonProperty(PropertyName = "OPPORTUNITY_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? OpportunityId { get; set; }
 
-        [JsonProperty(PropertyName = "ORGANISATION_ID")]
+        [JsonProperty(PropertyName = "ORGANISATION_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? OrganizationId { get; set; }
 
-        [JsonProperty(PropertyName = "PROJECT_ID")]
+        [JsonProperty(PropertyName = "PROJECT_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? ProjectId { get; set; }
 
-        [JsonProperty(PropertyName = "SECOND_PROJECT_ID")]
+        [JsonProperty(PropertyName = "SECOND_PROJECT_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? SecondProjectId { get; set; }
 
-        [JsonProperty(PropertyName = "SECOND_OPPORTUNITY_ID")]
+        [JsonProperty(PropertyName = "SECOND_OPPORTUNITY_ID", NullValueHandling = NullValueHandling.Ignore)]
         public int? SecondOpportunityId { get; set; }
 
-        [JsonProperty(PropertyName = "ROLE")]
+        [JsonProperty(PropertyName = "ROLE", NullValueHandling = NullValueHandling.Ignore)]
         public string Role { get; set; }
 
-        [JsonProperty(PropertyName = "DETAILS")]
+        [JsonProperty(PropertyName = "DETAILS", NullValueHandling = NullValueHandling.Ignore)]
         public string Details { get; set; }
     }
 }
