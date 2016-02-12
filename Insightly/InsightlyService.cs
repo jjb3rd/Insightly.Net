@@ -62,6 +62,15 @@ namespace Insightly
       catch { }
       return response;
     }
+
+    private static object GetRequestCached<T>( string url )
+    {
+      if( cache[ url ] == null )
+      {
+        cache.Set(url, DoRequest<T>(url, "GET", null).Result, StandardPolicy());
+      }
+      return cache[ url ];
+    }
     #endregion
 
     #region Contacts
@@ -73,30 +82,21 @@ namespace Insightly
       return DoRequest<Contact>("/Contacts", "POST", contact).Result;
     }
 
-    public static IEnumerable<Contact> GetContactsAsync( bool Brief = true )
+    public static IEnumerable<Contact> GetContactsAsync()
     {
-      if( cache[ "Contacts" ] == null )
-      {
-        string url = "/Contacts";
-        if( Brief )
-          url += "?Brief=True";
-        cache.Set("Contacts", DoRequest<IEnumerable<Contact>>(url, "GET", null).Result, StandardPolicy());
-      }
-      return cache[ "Contacts" ] as IEnumerable<Contact>;
+      return GetRequestCached<IEnumerable<Contact>>("/Contacts") as IEnumerable<Contact>;
+    }
+    
+    public static Contact GetContactAsync( int id )
+    {
+      return GetRequestCached<Contact>("/Contacts/" + id.ToString()) as Contact;
     }
     #endregion
 
     #region Organizations
-    public static IEnumerable<Organization> GetOrganisationsAsync( bool Brief = true )
+    public static IEnumerable<Organization> GetOrganisationsAsync()
     {
-      if( cache[ "Organisations" ] == null )
-      {
-        string url = "/Organisations";
-        if( Brief )
-          url += "?Brief=True";
-        cache.Set("Organisations", DoRequest<IEnumerable<Organization>>(url, "GET", null).Result, StandardPolicy());
-      }
-      return cache[ "Organisations" ] as IEnumerable<Organization>;
+      return GetRequestCached<IEnumerable<Organization>>("/Organisations") as IEnumerable<Organization>;
     }
     #endregion
   }
