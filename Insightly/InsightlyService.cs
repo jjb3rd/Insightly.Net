@@ -24,12 +24,15 @@ namespace Insightly
   using System.Collections.Generic;
   using Flurl.Http;
   using System.Threading.Tasks;
+  using System.Runtime.Caching;
 
   public static class InsightlyService
   {
     private static Uri _apiUri = new Uri("https://api.insight.ly/v2.1");
-
     public static string ApiKey { private get; set; }
+
+    private static ObjectCache cache = MemoryCache.Default;
+    private static CacheItemPolicy StandardPolicy() { return new CacheItemPolicy() { AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10) }; }
 
     #region Shared
     private static FlurlClient Authorise( string path )
@@ -37,16 +40,6 @@ namespace Insightly
       string request = _apiUri + path;
       return request.WithBasicAuth(ApiKey, "");
     }
-
-    //protected virtual async Task<T> DoRequest<T>( string url )
-    //{
-    //  return DoRequest<T>(url, "GET", null);
-    //}
-
-    //protected virtual string DoRequest( string url )
-    //{
-    //  return DoRequest(url, "GET", null);
-    //}
 
     private static async Task<T> DoRequest<T>( string url, string method, object body )
     {
@@ -72,29 +65,38 @@ namespace Insightly
     #endregion
 
     #region Contacts
-    public static Task<Contact> CreateContactAsync( Contact contact )
+    public static Contact CreateContactAsync( Contact contact )
     {
       if( contact == null )
         throw new ArgumentNullException("contact");
-      return DoRequest<Contact>("/Contacts", "POST", contact);
+      cache.Remove("Contacts");
+      return DoRequest<Contact>("/Contacts", "POST", contact).Result;
     }
 
-    public static Task<IEnumerable<Contact>> GetContactsAsync( bool Brief = true )
+    public static IEnumerable<Contact> GetContactsAsync( bool Brief = true )
     {
-      string url = "/Contacts";
-      if( Brief )
-        url += "?Brief=True";
-      return DoRequest<IEnumerable<Contact>>(url, "GET", null);
+      if( cache[ "Contacts" ] == null )
+      {
+        string url = "/Contacts";
+        if( Brief )
+          url += "?Brief=True";
+        cache.Set("Contacts", DoRequest<IEnumerable<Contact>>(url, "GET", null).Result, StandardPolicy());
+      }
+      return cache[ "Contacts" ] as IEnumerable<Contact>;
     }
     #endregion
 
     #region Organizations
-    public static Task<IEnumerable<Organization>> GetOrganisationsAsync( bool Brief = true )
+    public static IEnumerable<Organization> GetOrganisationsAsync( bool Brief = true )
     {
-      string url = "/Organisations";
-      if( Brief )
-        url += "?Brief=True";
-      return DoRequest<IEnumerable<Organization>>(url, "GET", null);
+      if( cache[ "Organisations" ] == null )
+      {
+        string url = "/Organisations";
+        if( Brief )
+          url += "?Brief=True";
+        cache.Set("Organisations", DoRequest<IEnumerable<Organization>>(url, "GET", null).Result, StandardPolicy());
+      }
+      return cache[ "Organisations" ] as IEnumerable<Organization>;
     }
     #endregion
   }
