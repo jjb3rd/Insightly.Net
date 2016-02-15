@@ -18,6 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace Insightly
 {
   using System;
@@ -86,24 +87,24 @@ namespace Insightly
     {
       return GetRequestCached<IEnumerable<Contact>>("/Contacts") as IEnumerable<Contact>;
     }
-    
+
     public static Contact GetContactAsync( int id )
     {
       return GetRequestCached<Contact>("/Contacts/" + id.ToString()) as Contact;
     }
     #endregion
 
-    #region Organizations
-    public static IEnumerable<Organization> GetOrganisationsAsync()
+    #region Organisations
+    public static IEnumerable<Organisation> GetOrganisationsAsync()
     {
-      return GetRequestCached<IEnumerable<Organization>>("/Organisations") as IEnumerable<Organization>;
+      return GetRequestCached<IEnumerable<Organisation>>("/Organisations") as IEnumerable<Organisation>;
     }
 
-    public static Organization GetOrganisationAsync( int? id )
+    public static Organisation GetOrganisationAsync( int? id )
     {
       if( id == null )
         throw new ArgumentNullException("id");
-      return GetRequestCached<Organization>("/Organisations/" + id.ToString()) as Organization;
+      return GetRequestCached<Organisation>("/Organisations/" + id.ToString()) as Organisation;
     }
     #endregion
   }

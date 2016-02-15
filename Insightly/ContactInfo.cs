@@ -18,32 +18,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Newtonsoft.Json;
 
 namespace Insightly
 {
+  using Newtonsoft.Json;
+
   [JsonObject(MemberSerialization.OptIn)]
-    public class ContactInfo
-    {
-        [JsonProperty(PropertyName = "CONTACT_INFO_ID", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+  public class ContactInfo
+  {
+    [JsonProperty(PropertyName = "CONTACT_INFO_ID", NullValueHandling = NullValueHandling.Ignore)]
+    public int? Id { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "TYPE", NullValueHandling = NullValueHandling.Ignore)]
-        public string ContactType { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "TYPE", NullValueHandling = NullValueHandling.Ignore)]
+    public string ContactType { get; set; }
 
-        [JsonProperty(PropertyName = "SUBTYPE", NullValueHandling = NullValueHandling.Ignore)]
-        public string ContactSubtype { get; set; }
+    [JsonProperty(PropertyName = "SUBTYPE", NullValueHandling = NullValueHandling.Ignore)]
+    public string ContactSubtype { get; set; }
 
-        [JsonProperty(PropertyName = "LABEL", NullValueHandling = NullValueHandling.Ignore)]
-        public string Label { get; set; }
+    [JsonProperty(PropertyName = "LABEL", NullValueHandling = NullValueHandling.Ignore)]
+    public string Label { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "DETAIL", NullValueHandling = NullValueHandling.Ignore)]
-        public string Detail { get; set; }
-    }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "DETAIL", NullValueHandling = NullValueHandling.Ignore)]
+    public string Detail { get; set; }
+  }
 }

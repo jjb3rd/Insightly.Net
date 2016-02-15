@@ -18,11 +18,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Insightly
 {
+  using Newtonsoft.Json;
+  using System.Collections.Generic;
+
   [JsonObject(MemberSerialization.OptIn)]
   public class Contact
   {

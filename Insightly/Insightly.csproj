@@ -68,6 +68,8 @@
     <Compile Include="CalendarEvent.cs" />
     <Compile Include="ContactInfo.cs" />
     <Compile Include="CustomField.cs" />
+    <Compile Include="Date.cs" />
+    <Compile Include="ContactLink.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="OrganizationDate.cs" />
     <Compile Include="EmailLink.cs" />

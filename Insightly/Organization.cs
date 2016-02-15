@@ -18,71 +18,72 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Newtonsoft.Json;
-using System;
 
 namespace Insightly
 {
+  using Newtonsoft.Json;
+  using System;
+
   [JsonObject(MemberSerialization.OptIn)]
-    public class Organization
-    {
-        [JsonProperty(PropertyName = "ORGANISATION_ID")]
-        public int? Id { get; set; }
+  public class Organisation
+  {
+    [JsonProperty(PropertyName = "ORGANISATION_ID")]
+    public int? Id { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "ORGANISATION_NAME")]
-        public string Name { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "ORGANISATION_NAME")]
+    public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "BACKGROUND")]
-        public string Background { get; set; }
+    [JsonProperty(PropertyName = "BACKGROUND")]
+    public string Background { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings"), JsonProperty(PropertyName = "IMAGE_URL")]
-        public string ImageUrl { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings"), JsonProperty(PropertyName = "IMAGE_URL")]
+    public string ImageUrl { get; set; }
 
-        [JsonProperty(PropertyName = "OWNER_USER_ID")]
-        public int? OwnerUserId { get; set; }
+    [JsonProperty(PropertyName = "OWNER_USER_ID")]
+    public int? OwnerUserId { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "DATE_CREATED_UTC")]
-        public DateTime? DateCreatedUtc { get; set; }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "DATE_CREATED_UTC")]
+    public DateTime? DateCreatedUtc { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "DATE_UPDATED_UTC")]
-        public DateTime? DateUpdatedUtc { get; set; }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "DATE_UPDATED_UTC")]
+    public DateTime? DateUpdatedUtc { get; set; }
 
-        [JsonProperty(PropertyName = "VISIBLE_TO")]
-        public string VisibleTo { get; set; }
+    [JsonProperty(PropertyName = "VISIBLE_TO")]
+    public string VisibleTo { get; set; }
 
-        [JsonProperty(PropertyName = "VISIBLE_TEAM_ID")]
-        public int? VisibleTeamId { get; set; }
+    [JsonProperty(PropertyName = "VISIBLE_TEAM_ID")]
+    public int? VisibleTeamId { get; set; }
 
-        [JsonProperty(PropertyName = "VISIBLE_USER_IDS")]
-        public string VisibleUserIds { get; set; }
+    [JsonProperty(PropertyName = "VISIBLE_USER_IDS")]
+    public string VisibleUserIds { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "CUSTOMFIELDS")]
-        public CustomField[] CustomFields { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "CUSTOMFIELDS")]
+    public CustomField[] CustomFields { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "ADDRESSES")]
-        public Address[] Addresses { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "ADDRESSES")]
+    public Address[] Addresses { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos"), JsonProperty(PropertyName = "CONTACTINFOS")]
-        public ContactInfo[] ContactInfos { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos"), JsonProperty(PropertyName = "CONTACTINFOS")]
+    public ContactInfo[] ContactInfos { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "DATES")]
-        public OrganizationDate[] Dates { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "DATES")]
+    public OrganizationDate[] Dates { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "TAGS")]
-        public Tag[] Tags { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "TAGS")]
+    public Tag[] Tags { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "LINKS")]
-        public Link[] Links { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "LINKS")]
+    public Link[] Links { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "ORGANISATIONLINKS")]
-        public OrganizationLink[] OrganizationLinks { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "ORGANISATIONLINKS")]
+    public OrganizationLink[] OrganizationLinks { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "EMAILLINKS")]
-        public EmailLink[] EmailLinks { get; set; }
-    }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "EMAILLINKS")]
+    public EmailLink[] EmailLinks { get; set; }
+  }
 }

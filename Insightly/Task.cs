@@ -1,8 +1,10 @@
 ﻿/*
- * Copyright 2014 Beckersoft, Inc.
+ * Started by Beckersoft, Inc.
+ * Extended by Razor Jam (razorjam.co.uk)
  *
  * Author(s):
  *  John Becker (john@beckersoft.com)
+ *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,102 +18,99 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Insightly
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class Task
-    {
-        [JsonProperty(PropertyName = "TASK_ID")]
-        public int? Id { get; set; }
+  using Newtonsoft.Json;
+  using System;
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "TITLE")]
-        public string Title { get; set; }
+  [JsonObject(MemberSerialization.OptIn)]
+  public class Task
+  {
+    [JsonProperty(PropertyName = "TASK_ID")]
+    public int? Id { get; set; }
 
-        [JsonProperty(PropertyName = "CATEGORY_ID")]
-        public int? CategoryId { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "TITLE")]
+    public string Title { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "DUE_DATE")]
-        public DateTime? DueDate { get; set; }
+    [JsonProperty(PropertyName = "CATEGORY_ID")]
+    public int? CategoryId { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "COMPLETED_DATE_UTC")]
-        public DateTime? CompletedDateUtc { get; set; }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "DUE_DATE")]
+    public DateTime? DueDate { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "PUBLICLY_VISIBLE")]
-        public bool PubliclyVisible { get; set; }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "COMPLETED_DATE_UTC")]
+    public DateTime? CompletedDateUtc { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "COMPLETED")]
-        public bool Completed { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "PUBLICLY_VISIBLE")]
+    public bool PubliclyVisible { get; set; }
 
-        [JsonProperty(PropertyName = "PROJECT_ID")]
-        public int? ProjectId { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "COMPLETED")]
+    public bool Completed { get; set; }
 
-        [JsonProperty(PropertyName = "DETAILS")]
-        public string Details { get; set; }
+    [JsonProperty(PropertyName = "PROJECT_ID")]
+    public int? ProjectId { get; set; }
 
-        /// <summary>
-        /// 'Completed', 'Deferred', 'In Progress', 'Not Started', 'Waiting'
-        /// </summary>
-        [JsonProperty(PropertyName = "STATUS")]
-        public string Status { get; set; }
+    [JsonProperty(PropertyName = "DETAILS")]
+    public string Details { get; set; }
 
-        [JsonProperty(PropertyName = "PRIORITY")]
-        public int? Priority { get; set; }
+    /// <summary>
+    /// 'Completed', 'Deferred', 'In Progress', 'Not Started', 'Waiting'
+    /// </summary>
+    [JsonProperty(PropertyName = "STATUS")]
+    public string Status { get; set; }
 
-        [JsonProperty(PropertyName = "PERCENT_COMPLETE")]
-        public int? PercentComplete { get; set; }
+    [JsonProperty(PropertyName = "PRIORITY")]
+    public int? Priority { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "START_DATE")]
-        public DateTime? StartDate { get; set; }
+    [JsonProperty(PropertyName = "PERCENT_COMPLETE")]
+    public int? PercentComplete { get; set; }
 
-        [JsonProperty(PropertyName = "ASSIGNED_BY_USER_ID")]
-        public int? AssignedByUserId { get; set; }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "START_DATE")]
+    public DateTime? StartDate { get; set; }
 
-        [JsonProperty(PropertyName = "PARENT_TASK_ID")]
-        public int? ParentTaskId { get; set; }
+    [JsonProperty(PropertyName = "ASSIGNED_BY_USER_ID")]
+    public int? AssignedByUserId { get; set; }
 
-        [JsonProperty(PropertyName = "OWNER_VISIBLE")]
-        public bool? OwnerVisible { get; set; }
+    [JsonProperty(PropertyName = "PARENT_TASK_ID")]
+    public int? ParentTaskId { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "RESPONSIBLE_USER_ID")]
-        public int ResponsibleUserId { get; set; }
+    [JsonProperty(PropertyName = "OWNER_VISIBLE")]
+    public bool? OwnerVisible { get; set; }
 
-        /// <summary>
-        /// Required
-        /// </summary>
-        [JsonProperty(PropertyName = "OWNER_USER_ID")]
-        public int OwnerUserId { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "RESPONSIBLE_USER_ID")]
+    public int ResponsibleUserId { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "DATE_CREATED_UTC")]
-        public DateTime? DateCreatedUtc { get; set; }
+    /// <summary>
+    /// Required
+    /// </summary>
+    [JsonProperty(PropertyName = "OWNER_USER_ID")]
+    public int OwnerUserId { get; set; }
 
-        [JsonConverter(typeof(InsightlyDateTimeConverter))]
-        [JsonProperty(PropertyName = "DATE_UPDATED_UTC")]
-        public DateTime? DateUpdatedUtc { get; set; }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "DATE_CREATED_UTC")]
+    public DateTime? DateCreatedUtc { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "TASKLINKS")]
-        public TaskLink[] TaskLinks { get; set; }
-    }
+    [JsonConverter(typeof(InsightlyDateTimeConverter))]
+    [JsonProperty(PropertyName = "DATE_UPDATED_UTC")]
+    public DateTime? DateUpdatedUtc { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays"), JsonProperty(PropertyName = "TASKLINKS")]
+    public TaskLink[] TaskLinks { get; set; }
+  }
 }

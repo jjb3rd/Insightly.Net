@@ -1,8 +1,10 @@
 ﻿/*
- * Copyright 2014 Beckersoft, Inc.
+ * Started by Beckersoft, Inc.
+ * Extended by Razor Jam (razorjam.co.uk)
  *
  * Author(s):
  *  John Becker (john@beckersoft.com)
+ *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,34 +18,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Insightly
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class TaskLink
-    {
-        [JsonProperty(PropertyName = "TASK_LINK_ID")]
-        public int TaskLinkId { get; set; }
+  using Newtonsoft.Json;
 
-        [JsonProperty(PropertyName = "TASK_ID")]
-        public int TaskId { get; set; }
+  [JsonObject(MemberSerialization.OptIn)]
+  public class TaskLink
+  {
+    [JsonProperty(PropertyName = "TASK_LINK_ID")]
+    public int TaskLinkId { get; set; }
 
-        [JsonProperty(PropertyName = "CONTACT_ID")]
-        public int? ContactId { get; set; }
+    [JsonProperty(PropertyName = "TASK_ID")]
+    public int TaskId { get; set; }
 
-        [JsonProperty(PropertyName = "ORGANISATION_ID")]
-        public int? OrganizationId { get; set; }
+    [JsonProperty(PropertyName = "CONTACT_ID")]
+    public int? ContactId { get; set; }
 
-        [JsonProperty(PropertyName = "OPPORTUNITY_ID")]
-        public int? OpportunityId { get; set; }
+    [JsonProperty(PropertyName = "ORGANISATION_ID")]
+    public int? OrganizationId { get; set; }
 
-        [JsonProperty(PropertyName = "PROJECT_ID")]
-        public int? ProjectId { get; set; }
-    }
+    [JsonProperty(PropertyName = "OPPORTUNITY_ID")]
+    public int? OpportunityId { get; set; }
+
+    [JsonProperty(PropertyName = "PROJECT_ID")]
+    public int? ProjectId { get; set; }
+  }
 }
