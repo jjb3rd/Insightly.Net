@@ -98,6 +98,13 @@ namespace Insightly
     {
       return GetRequestCached<IEnumerable<Organization>>("/Organisations") as IEnumerable<Organization>;
     }
+
+    public static Organization GetOrganisationAsync( int? id )
+    {
+      if( id == null )
+        throw new ArgumentNullException("id");
+      return GetRequestCached<Organization>("/Organisations/" + id.ToString()) as Organization;
+    }
     #endregion
   }
 }
