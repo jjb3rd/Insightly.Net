@@ -28,13 +28,13 @@ namespace Insightly
   public class Opportunity
   {
     [JsonProperty(PropertyName = "OPPORTUNITY_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int OpportunityId { get; set; }
+    public int Id { get; set; }
 
     [JsonProperty(PropertyName = "OPPORTUNITY_NAME", NullValueHandling = NullValueHandling.Ignore)]
-    public string OpportunityName { get; set; }
+    public string Name { get; set; }
 
     [JsonProperty(PropertyName = "OPPORTUNITY_DETAILS", NullValueHandling = NullValueHandling.Ignore)]
-    public string OpportunityDetails { get; set; }
+    public string Details { get; set; }
 
     [JsonProperty(PropertyName = "PROBABILITY", NullValueHandling = NullValueHandling.Ignore)]
     public int Probability { get; set; }
@@ -67,7 +67,7 @@ namespace Insightly
     public int StageId { get; set; }
 
     [JsonProperty(PropertyName = "OPPORTUNITY_STATE", NullValueHandling = NullValueHandling.Ignore)]
-    public string OpportunityState { get; set; }
+    public string State { get; set; }
 
     [JsonProperty(PropertyName = "IMAGE_URL", NullValueHandling = NullValueHandling.Ignore)]
     public string ImageUrl { get; set; }
