@@ -130,7 +130,24 @@ namespace Insightly
     public static IEnumerable<Opportunity> GetOpportunitiesAsync()
     {
       return GetRequestCached<IEnumerable<Opportunity>>("/Opportunities") as IEnumerable<Opportunity>;
-    } 
+    }
+
+    public static Opportunity GetOpportunityAsync( int id )
+    {
+      return GetRequestCached<Opportunity>("/Opportunities/" + id.ToString()) as Opportunity;
+    }
+    #endregion
+
+    #region Users
+    public static IEnumerable<User> GetUsersAsync()
+    {
+      return GetRequestCached<IEnumerable<User>>("/Users") as IEnumerable<User>;
+    }
+
+    public static User GetUserAsync( int id )
+    {
+      return GetRequestCached<User>("/Users/" + id.ToString()) as User;
+    }
     #endregion
   }
 }
