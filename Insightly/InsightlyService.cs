@@ -125,5 +125,12 @@ namespace Insightly
       return GetRequestCached<Organisation>("/Organisations/" + id.ToString()) as Organisation;
     }
     #endregion
+
+    #region Opportunities
+    public static IEnumerable<Opportunity> GetOpportunitiesAsync()
+    {
+      return GetRequestCached<IEnumerable<Opportunity>>("/Opportunities") as IEnumerable<Opportunity>;
+    } 
+    #endregion
   }
 }
