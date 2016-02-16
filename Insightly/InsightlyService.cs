@@ -19,6 +19,8 @@
  * limitations under the License.
  */
 
+using System.CodeDom;
+
 namespace Insightly
 {
   using System;
@@ -58,6 +60,9 @@ namespace Insightly
           case "get":
             response = await request.GetJsonAsync<T>().ConfigureAwait(false);
             break;
+          case "put":
+            response = await request.PutJsonAsync(body).ReceiveJson<T>().ConfigureAwait(false);
+            break;
         }
       }
       catch { }
@@ -79,7 +84,7 @@ namespace Insightly
     {
       if( contact == null )
         throw new ArgumentNullException("contact");
-      cache.Remove("Contacts");
+      cache.Remove("/Contacts");
       return DoRequest<Contact>("/Contacts", "POST", contact).Result;
     }
 
@@ -91,6 +96,19 @@ namespace Insightly
     public static Contact GetContactAsync( int id )
     {
       return GetRequestCached<Contact>("/Contacts/" + id.ToString()) as Contact;
+    }
+
+    public static Contact UpdateContactAsync( Contact contact )
+    {
+      if( contact == null )
+        throw new ArgumentNullException("contact");
+      Contact response = DoRequest<Contact>("/Contacts", "PUT", contact).Result;
+      if (response != null)
+      {
+        cache.Set("/Contacts/" + response.Id, response, StandardPolicy());
+        cache.Remove("/Contacts");
+      }
+      return response;
     }
     #endregion
 
