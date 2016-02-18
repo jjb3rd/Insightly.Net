@@ -27,20 +27,20 @@ namespace Insightly
   [JsonObject(MemberSerialization.OptIn)]
   public class OrganizationDate
   {
-    [JsonProperty(PropertyName = "DATE_ID")]
-    public int? Id { get; set; }
+    [JsonProperty(PropertyName = "DATE_ID", NullValueHandling = NullValueHandling.Ignore)]
+    public int Id { get; set; }
 
-    [JsonProperty(PropertyName = "OCCASION_NAME")]
+    [JsonProperty(PropertyName = "OCCASION_NAME", NullValueHandling = NullValueHandling.Ignore)]
     public string OccasionName { get; set; }
 
     [JsonConverter(typeof(InsightlyDateTimeConverter))]
-    [JsonProperty(PropertyName = "OCCASION_DATE")]
+    [JsonProperty(PropertyName = "OCCASION_DATE", NullValueHandling = NullValueHandling.Ignore)]
     public DateTime? OccasionDate { get; set; }
 
-    [JsonProperty(PropertyName = "REPEAT_YEARLY")]
+    [JsonProperty(PropertyName = "REPEAT_YEARLY", NullValueHandling = NullValueHandling.Ignore)]
     public bool? RepeatYearly { get; set; }
 
-    [JsonProperty(PropertyName = "CREATE_TASK_YEARLY")]
+    [JsonProperty(PropertyName = "CREATE_TASK_YEARLY", NullValueHandling = NullValueHandling.Ignore)]
     public bool? CreateTaskYearly { get; set; }
   }
 }

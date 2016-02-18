@@ -26,7 +26,7 @@ namespace Insightly
   [JsonObject(MemberSerialization.OptIn)]
   public class Tag
   {
-    [JsonProperty(PropertyName = "TAG_NAME")]
+    [JsonProperty(PropertyName = "TAG_NAME", NullValueHandling = NullValueHandling.Ignore)]
     public string OccasionName { get; set; }
   }
 }

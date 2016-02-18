@@ -19,8 +19,6 @@
  * limitations under the License.
  */
 
-using System.CodeDom;
-
 namespace Insightly
 {
   using System;
@@ -61,6 +59,8 @@ namespace Insightly
             response = await request.GetJsonAsync<T>().ConfigureAwait(false);
             break;
           case "put":
+            if( body == null )
+              throw new ArgumentNullException("body");
             response = await request.PutJsonAsync(body).ReceiveJson<T>().ConfigureAwait(false);
             break;
         }
@@ -118,7 +118,7 @@ namespace Insightly
       return GetRequestCached<IEnumerable<Organisation>>("/Organisations") as IEnumerable<Organisation>;
     }
 
-    public static Organisation GetOrganisationAsync( int? id )
+    public static Organisation GetOrganisationAsync( int id )
     {
       if( id == null )
         throw new ArgumentNullException("id");

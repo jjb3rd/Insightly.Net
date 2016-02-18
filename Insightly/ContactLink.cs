@@ -27,16 +27,16 @@ namespace Insightly
   public class ContactLink
   {
     [JsonProperty(PropertyName = "CONTACT_LINK_ID")]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     [JsonProperty(PropertyName = "FIRST_CONTACT_ID")]
-    public int? FirstContactId { get; set; }
+    public int FirstContactId { get; set; }
 
     [JsonProperty(PropertyName = "SECOND_CONTACT_ID")]
-    public int? SecondContactId { get; set; }
+    public int SecondContactId { get; set; }
 
     [JsonProperty(PropertyName = "RELATIONSHIP_ID")]
-    public int? RelationshipId { get; set; }
+    public int RelationshipId { get; set; }
 
     [JsonProperty(PropertyName = "DETAILS")]
     public string Details { get; set; }

@@ -27,7 +27,7 @@ namespace Insightly
   public class ContactInfo
   {
     [JsonProperty(PropertyName = "CONTACT_INFO_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// Required

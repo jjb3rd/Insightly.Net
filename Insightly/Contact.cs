@@ -48,7 +48,7 @@ namespace Insightly
     }
 
     [JsonProperty(PropertyName = "CONTACT_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     [JsonProperty(PropertyName = "SALUTATION", NullValueHandling = NullValueHandling.Ignore)]
     public string Salutation { get; set; }
@@ -66,10 +66,10 @@ namespace Insightly
     public string ImageUrl { get; set; }
 
     [JsonProperty(PropertyName = "DEFAULT_LINKED_ORGANISATION", NullValueHandling = NullValueHandling.Ignore)]
-    public int? DefaultLinkedOrganisation { get; set; }
+    public int DefaultLinkedOrganisation { get; set; }
 
     [JsonProperty(PropertyName = "OWNER_USER_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? OwnerUserId { get; set; }
+    public int OwnerUserId { get; set; }
 
     [JsonProperty(PropertyName = "DATE_CREATED_UTC", NullValueHandling = NullValueHandling.Ignore)]
     public string DateCreated { get; set; }
@@ -81,7 +81,7 @@ namespace Insightly
     public string VisibleTo { get; set; }
 
     [JsonProperty(PropertyName = "VISIBLE_TEAM_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? VisibleTeamId { get; set; }
+    public int VisibleTeamId { get; set; }
 
     [JsonProperty(PropertyName = "VISIBLE_USER_IDS", NullValueHandling = NullValueHandling.Ignore)]
     public string VisibleUserIds { get; set; }

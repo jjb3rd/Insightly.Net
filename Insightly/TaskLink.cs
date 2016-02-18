@@ -33,15 +33,15 @@ namespace Insightly
     public int TaskId { get; set; }
 
     [JsonProperty(PropertyName = "CONTACT_ID")]
-    public int? ContactId { get; set; }
+    public int ContactId { get; set; }
 
     [JsonProperty(PropertyName = "ORGANISATION_ID")]
-    public int? OrganizationId { get; set; }
+    public int OrganizationId { get; set; }
 
     [JsonProperty(PropertyName = "OPPORTUNITY_ID")]
-    public int? OpportunityId { get; set; }
+    public int OpportunityId { get; set; }
 
     [JsonProperty(PropertyName = "PROJECT_ID")]
-    public int? ProjectId { get; set; }
+    public int ProjectId { get; set; }
   }
 }

@@ -27,7 +27,7 @@ namespace Insightly
   public class Date
   {
     [JsonProperty(PropertyName = "DATE_ID")]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     [JsonProperty(PropertyName = "OCCASION_NAME")]
     public string OccasionName { get; set; }

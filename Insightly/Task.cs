@@ -28,7 +28,7 @@ namespace Insightly
   public class Task
   {
     [JsonProperty(PropertyName = "TASK_ID")]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// Required
@@ -37,7 +37,7 @@ namespace Insightly
     public string Title { get; set; }
 
     [JsonProperty(PropertyName = "CATEGORY_ID")]
-    public int? CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
     [JsonConverter(typeof(InsightlyDateTimeConverter))]
     [JsonProperty(PropertyName = "DUE_DATE")]
@@ -60,7 +60,7 @@ namespace Insightly
     public bool Completed { get; set; }
 
     [JsonProperty(PropertyName = "PROJECT_ID")]
-    public int? ProjectId { get; set; }
+    public int ProjectId { get; set; }
 
     [JsonProperty(PropertyName = "DETAILS")]
     public string Details { get; set; }
@@ -72,20 +72,20 @@ namespace Insightly
     public string Status { get; set; }
 
     [JsonProperty(PropertyName = "PRIORITY")]
-    public int? Priority { get; set; }
+    public int Priority { get; set; }
 
     [JsonProperty(PropertyName = "PERCENT_COMPLETE")]
-    public int? PercentComplete { get; set; }
+    public int PercentComplete { get; set; }
 
     [JsonConverter(typeof(InsightlyDateTimeConverter))]
     [JsonProperty(PropertyName = "START_DATE")]
     public DateTime? StartDate { get; set; }
 
     [JsonProperty(PropertyName = "ASSIGNED_BY_USER_ID")]
-    public int? AssignedByUserId { get; set; }
+    public int AssignedByUserId { get; set; }
 
     [JsonProperty(PropertyName = "PARENT_TASK_ID")]
-    public int? ParentTaskId { get; set; }
+    public int ParentTaskId { get; set; }
 
     [JsonProperty(PropertyName = "OWNER_VISIBLE")]
     public bool? OwnerVisible { get; set; }

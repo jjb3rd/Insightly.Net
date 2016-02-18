@@ -27,25 +27,25 @@ namespace Insightly
   public class Link
   {
     [JsonProperty(PropertyName = "LINK_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     [JsonProperty(PropertyName = "CONTACT_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? ContactId { get; set; }
+    public int ContactId { get; set; }
 
     [JsonProperty(PropertyName = "OPPORTUNITY_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? OpportunityId { get; set; }
+    public int OpportunityId { get; set; }
 
     [JsonProperty(PropertyName = "ORGANISATION_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? OrganizationId { get; set; }
+    public int OrganizationId { get; set; }
 
     [JsonProperty(PropertyName = "PROJECT_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? ProjectId { get; set; }
+    public int ProjectId { get; set; }
 
     [JsonProperty(PropertyName = "SECOND_PROJECT_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? SecondProjectId { get; set; }
+    public int SecondProjectId { get; set; }
 
     [JsonProperty(PropertyName = "SECOND_OPPORTUNITY_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int? SecondOpportunityId { get; set; }
+    public int SecondOpportunityId { get; set; }
 
     [JsonProperty(PropertyName = "ROLE", NullValueHandling = NullValueHandling.Ignore)]
     public string Role { get; set; }
