@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/elliotchaim/Insightly.Net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Razor Jam has extended the original package which was inactive. It has been reimplemented using FlurlHttp, and more functionality has been added.</releaseNotes>
+    <releaseNotes>Razor Jam has extended the original package which was inactive and not finished. Read the wiki here: https://github.com/elliotchaim/Insightly.Net/wiki </releaseNotes>
     <copyright>There is no copyright!</copyright>
     <tags>razor jam razorjam insightly api</tags>
   </metadata>
