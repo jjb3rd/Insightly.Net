@@ -19,13 +19,13 @@
  * limitations under the License.
  */
 
-namespace RazorJam.Insightly
-{
-   using Newtonsoft.Json;
+using Newtonsoft.Json;
 
+namespace RazorJam.Insightly.Implementations
+{
    //TODO: Implement Class
    [JsonObject(MemberSerialization.OptIn)]
-   public class CalendarEvent
+   public class CalendarEvent: IInsightlyObject
    {
       public CalendarEvent() { }
    }

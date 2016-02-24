@@ -16,26 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
  namespace RazorJam.Insightly
 {
+   using System.Threading.Tasks;
    using System.Collections.Generic;
 
    public interface IInsightlyService
    {
-      IEnumerable<Contact> GetContactsAsync();
-      Contact CreateContactAsync( Contact contact );
-      Contact GetContactAsync( int id );
-      Contact UpdateContactAsync( Contact contact );
-      bool DeleteContactAsync( int id );
-
-      IEnumerable<Organisation> GetOrganisationsAsync();
-      Organisation GetOrganisationAsync( int id );
-
-      IEnumerable<Opportunity> GetOpportunitiesAsync();
-      Opportunity GetOpportunityAsync( int id );
-
-      IEnumerable<User> GetUsersAsync();
-      User GetUserAsync( int id );
+      object GetRequestCached<T>( string url );
+      Task<T> DoRequest<T>( string url, string method, object body );
+      IInsightlyService With( string resource );
+      IEnumerable<IInsightlyObject> GetAll<IInsightlyObject>();
+      IInsightlyObject Create( IInsightlyObject data );
+      IInsightlyObject Get<IInsightlyObject>(int id);
+      IInsightlyObject Update<IInsightlyObject>( IInsightlyObject data );
+      bool Delete();
    }
 }

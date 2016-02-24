@@ -21,11 +21,11 @@
 
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class TaskLink
-  {
+  public class TaskLink: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "TASK_LINK_ID")]
     public int TaskLinkId { get; set; }
 

@@ -22,11 +22,11 @@
 using System;
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class OrganizationDate
-  {
+  public class OrganizationDate: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "DATE_ID", NullValueHandling = NullValueHandling.Ignore)]
     public int Id { get; set; }
 

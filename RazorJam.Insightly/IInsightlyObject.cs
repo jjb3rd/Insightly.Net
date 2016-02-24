@@ -1,9 +1,7 @@
 ﻿/*
- * Started by Beckersoft, Inc.
- * Extended by Razor Jam (razorjam.co.uk)
+ * Razor Jam (razorjam.co.uk)
  *
- * Author(s):
- *  John Becker (john@beckersoft.com)
+ * Author:
  *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,14 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-using Newtonsoft.Json;
-
-namespace RazorJam.Insightly.Implementations
+ 
+ namespace RazorJam.Insightly
 {
-  // TODO: Implement Class
-  [JsonObject(MemberSerialization.OptIn)]
-  public class Comment: IInsightlyObject
+   public interface IInsightlyObject
    {
-  }
+   }
 }

@@ -21,11 +21,11 @@
 
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class FileAttachment
-  {
+  public class FileAttachment: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "FILE_ID", NullValueHandling = NullValueHandling.Ignore)]
     public int FileId { get; set; }
 

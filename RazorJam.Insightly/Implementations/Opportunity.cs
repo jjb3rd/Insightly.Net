@@ -22,11 +22,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class Opportunity
-  {
+  public class Opportunity: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "OPPORTUNITY_ID", NullValueHandling = NullValueHandling.Ignore)]
     public int Id { get; set; }
 

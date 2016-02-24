@@ -21,11 +21,11 @@
 
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   // TODO: Implement Class
   [JsonObject(MemberSerialization.OptIn)]
-  public class Note
-  {
+  public class Note: IInsightlyObject
+   {
   }
 }

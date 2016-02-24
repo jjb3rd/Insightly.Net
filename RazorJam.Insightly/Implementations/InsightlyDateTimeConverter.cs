@@ -21,7 +21,7 @@
 
 using Newtonsoft.Json.Converters;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   class InsightlyDateTimeConverter: IsoDateTimeConverter
   {

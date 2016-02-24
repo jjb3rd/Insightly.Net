@@ -21,11 +21,11 @@
 
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class EmailLink
-  {
+  public class EmailLink: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "EMAIL_LINK_ID", NullValueHandling = NullValueHandling.Ignore)]
     public int Id { get; set; }
 

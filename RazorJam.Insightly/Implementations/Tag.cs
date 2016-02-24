@@ -21,11 +21,11 @@
 
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class Tag
-  {
+  public class Tag: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "TAG_NAME", NullValueHandling = NullValueHandling.Ignore)]
     public string OccasionName { get; set; }
   }

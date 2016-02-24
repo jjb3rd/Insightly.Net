@@ -21,11 +21,11 @@
 
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class CustomField
-  {
+  public class CustomField: IInsightlyObject
+   {
     [JsonProperty(PropertyName = "CUSTOM_FIELD_ID", NullValueHandling = NullValueHandling.Ignore)]
     public string Id { get; set; }
 

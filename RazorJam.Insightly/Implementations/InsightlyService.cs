@@ -27,30 +27,84 @@ namespace RazorJam.Insightly.Implementations
    using System.Threading.Tasks;
    using Flurl.Http;
 
-   public class InsightlyService: IInsightlyService
+   public class InsightlyService : IInsightlyService
    {
       private string _apiUri = "https://api.insight.ly/v2.1/";
-      private string ApiKey { get; set; }
-      private ObjectCache cache;
-      private CacheItemPolicy StandardPolicy() { return new CacheItemPolicy() { AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10) }; }
+      private string ApiKey { get; }
+      private readonly ObjectCache cache;
+      private CacheItemPolicy StandardPolicy()
+      {
+         return new CacheItemPolicy() {AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10)};
+      }
+      private string Resource { get; set; }
 
-      public InsightlyService( string key )
+      public InsightlyService(string key)
       {
          ApiKey = key;
          cache = MemoryCache.Default;
       }
 
-      #region Shared
-      private FlurlClient Authorise( string path )
+      public IInsightlyService With(string resource)
       {
-         string request = _apiUri + path;
-         return request.WithBasicAuth(ApiKey, "");
+         this.Resource = resource;
+         return this;
       }
 
-      private async Task<T> DoRequest<T>( string url, string method, object body )
+      public IEnumerable<IInsightlyObject> GetAll<IInsightlyObject>()
       {
-         FlurlClient request = Authorise(url);
-         T response = default(T);
+         return GetRequestCached<IEnumerable<IInsightlyObject>>(this.Resource) as IEnumerable<IInsightlyObject>;
+      }
+
+      public IInsightlyObject Create(IInsightlyObject data)
+      {
+         if (data == null)
+            throw new ArgumentNullException(nameof(data));
+         cache.Remove("Contacts");
+         return DoRequest<IInsightlyObject>(this.Resource, "POST", data).Result;
+      }
+
+      public IInsightlyObject Get<IInsightlyObject>(int id)
+      {
+         return (IInsightlyObject) GetRequestCached<IInsightlyObject>(this.Resource + id.ToString());
+      }
+
+      // TODO: fix caching issue
+      // TODO: use, and test
+      public IInsightlyObject Update<IInsightlyObject>(IInsightlyObject data)
+      {
+         throw new NotImplementedException();
+         if (data == null)
+            throw new ArgumentNullException(nameof(data));
+
+         var response = DoRequest<IInsightlyObject>(this.Resource, "PUT", data).Result;
+         if (response == null)
+            return default(IInsightlyObject);
+
+         //cache.Set("Contacts/" + response.Id, response, StandardPolicy());
+         cache.Remove("Contacts");
+
+         return response;
+      }
+
+      // TODO: implement, use, and test
+      public bool Delete()
+      {
+         throw new NotImplementedException();
+      }
+
+      public object GetRequestCached<T>( string url )
+      {
+         if( cache[ url ] == null )
+         {
+            cache.Set(url, DoRequest<T>(url, "GET", null).Result, StandardPolicy());
+         }
+         return cache[ url ];
+      }
+
+      public async Task<T> DoRequest<T>( string url, string method, object body )
+      {
+         var request = Authorise(url);
+         var response = default(T);
          try
          {
             switch( method.ToLower() )
@@ -70,92 +124,16 @@ namespace RazorJam.Insightly.Implementations
                   break;
             }
          }
-         catch { }
-         return response;
-      }
-
-      private object GetRequestCached<T>( string url )
-      {
-         if( cache[ url ] == null )
+         catch
          {
-            cache.Set(url, DoRequest<T>(url, "GET", null).Result, StandardPolicy());
-         }
-         return cache[ url ];
-      }
-      #endregion
-
-      #region Contacts
-      public IEnumerable<Contact> GetContactsAsync()
-      {
-         return GetRequestCached<IEnumerable<Contact>>("/Contacts") as IEnumerable<Contact>;
-      }
-
-      public Contact CreateContactAsync( Contact contact )
-      {
-         if( contact == null )
-            throw new ArgumentNullException(nameof(contact));
-         cache.Remove("/Contacts");
-         return DoRequest<Contact>("/Contacts", "POST", contact).Result;
-      }
-
-      public Contact GetContactAsync( int id )
-      {
-         return GetRequestCached<Contact>("/Contacts/" + id.ToString()) as Contact;
-      }
-
-      public Contact UpdateContactAsync( Contact contact )
-      {
-         if( contact == null )
-            throw new ArgumentNullException(nameof(contact));
-         Contact response = DoRequest<Contact>("/Contacts", "PUT", contact).Result;
-         if( response != null )
-         {
-            cache.Set("/Contacts/" + response.Id, response, StandardPolicy());
-            cache.Remove("/Contacts");
          }
          return response;
       }
 
-      public bool DeleteContactAsync( int id )
+      public FlurlClient Authorise( string path )
       {
-         throw new NotImplementedException();
+         var request = _apiUri + path;
+         return request.WithBasicAuth(ApiKey, "");
       }
-      #endregion
-
-      #region Organisations
-      public IEnumerable<Organisation> GetOrganisationsAsync()
-      {
-         return GetRequestCached<IEnumerable<Organisation>>("/Organisations") as IEnumerable<Organisation>;
-      }
-
-      public Organisation GetOrganisationAsync( int id )
-      {
-         return GetRequestCached<Organisation>("/Organisations/" + id.ToString()) as Organisation;
-      }
-      #endregion
-
-      #region Opportunities
-      public IEnumerable<Opportunity> GetOpportunitiesAsync()
-      {
-         return GetRequestCached<IEnumerable<Opportunity>>("/Opportunities") as IEnumerable<Opportunity>;
-      }
-
-      public Opportunity GetOpportunityAsync( int id )
-      {
-         return GetRequestCached<Opportunity>("/Opportunities/" + id.ToString()) as Opportunity;
-      }
-      #endregion
-
-      #region Users
-      public IEnumerable<User> GetUsersAsync()
-      {
-         return GetRequestCached<IEnumerable<User>>("/Users") as IEnumerable<User>;
-      }
-
-      public User GetUserAsync( int id )
-      {
-         return GetRequestCached<User>("/Users/" + id.ToString()) as User;
-      }
-      #endregion
    }
 }

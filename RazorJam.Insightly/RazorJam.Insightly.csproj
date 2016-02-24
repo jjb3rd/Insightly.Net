@@ -40,16 +40,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Flurl, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Flurl.1.0.10\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Flurl.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Flurl.1.0.10\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Flurl.dll</HintPath>
     </Reference>
     <Reference Include="Flurl.Http, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Flurl.Http.0.7.0\lib\net45\Flurl.Http.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Flurl.Http.0.7.0\lib\portable-net45+sl50+win+wpa81+wp80\Flurl.Http.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,37 +57,40 @@
     <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="Comment.cs" />
-    <Compile Include="Contact.cs" />
-    <Compile Include="CalendarEvent.cs" />
-    <Compile Include="ContactInfo.cs" />
-    <Compile Include="CustomField.cs" />
-    <Compile Include="Date.cs" />
-    <Compile Include="ContactLink.cs" />
-    <Compile Include="FileAttachment.cs" />
+    <Compile Include="IInsightlyObject.cs" />
+    <Compile Include="Implementations\Address.cs" />
+    <Compile Include="Implementations\Comment.cs" />
+    <Compile Include="Implementations\Contact.cs" />
+    <Compile Include="Implementations\CalendarEvent.cs" />
+    <Compile Include="Implementations\ContactInfo.cs" />
+    <Compile Include="Implementations\CustomField.cs" />
+    <Compile Include="Implementations\Date.cs" />
+    <Compile Include="Implementations\ContactLink.cs" />
+    <Compile Include="Implementations\FileAttachment.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="OrganizationDate.cs" />
-    <Compile Include="EmailLink.cs" />
-    <Compile Include="FileCategory.cs" />
-    <Compile Include="InsightlyDateTimeConverter.cs" />
-    <Compile Include="InsightlyService.cs" />
-    <Compile Include="Link.cs" />
-    <Compile Include="Note.cs" />
-    <Compile Include="Opportunity.cs" />
-    <Compile Include="OpportunityCategory.cs" />
-    <Compile Include="Organization.cs" />
-    <Compile Include="OrganizationLink.cs" />
-    <Compile Include="Project.cs" />
-    <Compile Include="ProjectCategory.cs" />
+    <Compile Include="IInsightlyService.cs" />
+    <Compile Include="Implementations\OrganizationDate.cs" />
+    <Compile Include="Implementations\EmailLink.cs" />
+    <Compile Include="Implementations\FileCategory.cs" />
+    <Compile Include="Implementations\InsightlyDateTimeConverter.cs" />
+    <Compile Include="Implementations\InsightlyService.cs" />
+    <Compile Include="Implementations\Link.cs" />
+    <Compile Include="Implementations\Note.cs" />
+    <Compile Include="Implementations\Opportunity.cs" />
+    <Compile Include="Implementations\OpportunityCategory.cs" />
+    <Compile Include="Implementations\Organization.cs" />
+    <Compile Include="Implementations\OrganizationLink.cs" />
+    <Compile Include="Implementations\Project.cs" />
+    <Compile Include="Implementations\ProjectCategory.cs" />
+    <Compile Include="Infrastructure\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tag.cs" />
-    <Compile Include="Task.cs" />
-    <Compile Include="TaskCategory.cs" />
-    <Compile Include="TaskLink.cs" />
-    <Compile Include="Team.cs" />
-    <Compile Include="TeamMember.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Implementations\Tag.cs" />
+    <Compile Include="Implementations\Task.cs" />
+    <Compile Include="Implementations\TaskCategory.cs" />
+    <Compile Include="Implementations\TaskLink.cs" />
+    <Compile Include="Implementations\Team.cs" />
+    <Compile Include="Implementations\TeamMember.cs" />
+    <Compile Include="Implementations\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -22,10 +22,10 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
   [JsonObject(MemberSerialization.OptIn)]
-  public class Contact
+  public class Contact : IInsightlyObject
   {
     public Contact() { }
 

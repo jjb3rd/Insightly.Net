@@ -19,35 +19,35 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
-
-namespace RazorJam.Insightly
+namespace RazorJam.Insightly.Implementations
 {
-  [JsonObject(MemberSerialization.OptIn)]
-  public class Address
-  {
-    [JsonProperty(PropertyName = "ADDRESS_ID", NullValueHandling = NullValueHandling.Ignore)]
-    public int Id { get; set; }
+   using Newtonsoft.Json;
 
-    /// <summary>
-    /// Required.  Acceptable values include 'Work', 'Postal' and 'Other'
-    /// </summary>
-    [JsonProperty(PropertyName = "ADDRESS_TYPE", NullValueHandling = NullValueHandling.Ignore)]
-    public string AddressType { get; set; }
+   [JsonObject(MemberSerialization.OptIn)]
+   public class Address: IInsightlyObject
+   {
+      [JsonProperty(PropertyName = "ADDRESS_ID", NullValueHandling = NullValueHandling.Ignore)]
+      public int Id { get; set; }
 
-    [JsonProperty(PropertyName = "STREET", NullValueHandling = NullValueHandling.Ignore)]
-    public string Street { get; set; }
+      /// <summary>
+      /// Required.  Acceptable values include 'Work', 'Postal' and 'Other'
+      /// </summary>
+      [JsonProperty(PropertyName = "ADDRESS_TYPE", NullValueHandling = NullValueHandling.Ignore)]
+      public string AddressType { get; set; }
 
-    [JsonProperty(PropertyName = "CITY", NullValueHandling = NullValueHandling.Ignore)]
-    public string City { get; set; }
+      [JsonProperty(PropertyName = "STREET", NullValueHandling = NullValueHandling.Ignore)]
+      public string Street { get; set; }
 
-    [JsonProperty(PropertyName = "STATE", NullValueHandling = NullValueHandling.Ignore)]
-    public string State { get; set; }
+      [JsonProperty(PropertyName = "CITY", NullValueHandling = NullValueHandling.Ignore)]
+      public string City { get; set; }
 
-    [JsonProperty(PropertyName = "POSTCODE", NullValueHandling = NullValueHandling.Ignore)]
-    public string PostalCode { get; set; }
+      [JsonProperty(PropertyName = "STATE", NullValueHandling = NullValueHandling.Ignore)]
+      public string State { get; set; }
 
-    [JsonProperty(PropertyName = "COUNTRY", NullValueHandling = NullValueHandling.Ignore)]
-    public string Country { get; set; }
-  }
+      [JsonProperty(PropertyName = "POSTCODE", NullValueHandling = NullValueHandling.Ignore)]
+      public string PostalCode { get; set; }
+
+      [JsonProperty(PropertyName = "COUNTRY", NullValueHandling = NullValueHandling.Ignore)]
+      public string Country { get; set; }
+   }
 }
