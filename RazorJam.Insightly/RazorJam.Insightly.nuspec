@@ -7,10 +7,10 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/elliotchaim/Insightly.Net</projectUrl>
+    <projectUrl>https://github.com/elliotchaim/Insightly.Net/wiki</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Razor Jam has extended the original package which was inactive and not finished. Read the wiki here: https://github.com/elliotchaim/Insightly.Net/wiki </releaseNotes>
+    <releaseNotes>RazorJam.Insightly.Net is a fluent, cached wrapper service for the Insightly REST-based API v2.1.. Read the wiki here: https://github.com/elliotchaim/Insightly.Net/wiki </releaseNotes>
     <copyright>There is no copyright!</copyright>
     <tags>razor jam razorjam insightly api</tags>
   </metadata>
