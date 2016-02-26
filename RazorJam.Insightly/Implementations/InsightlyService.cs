@@ -1,9 +1,7 @@
 ﻿/*
- * Started by Beckersoft, Inc.
- * Extended by Razor Jam (razorjam.co.uk)
+ * Razor Jam (razorjam.co.uk)
  *
- * Author(s):
- *  John Becker (john@beckersoft.com)
+ * Author:
  *  Elliot Chaim (elliot.chaim@razorjam.co.uk)
  *  
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,116 +21,123 @@ namespace RazorJam.Insightly.Implementations
 {
    using System;
    using System.Collections.Generic;
+   using System.Configuration;
+   using System.Net.Http;
    using System.Runtime.Caching;
    using System.Threading.Tasks;
    using Flurl.Http;
 
-   public class InsightlyService : IInsightlyService
+   public class InsightlyService: IInsightlyService, IInsightlyServiceWithResource
    {
-      private string _apiUri = "https://api.insight.ly/v2.1/";
-      private string ApiKey { get; }
-      private readonly ObjectCache cache;
-      private CacheItemPolicy StandardPolicy()
-      {
-         return new CacheItemPolicy() {AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10)};
-      }
+      private const string InsightlyUri = "https://api.insight.ly/v2.1/";
+      private string ApiKey => ConfigurationManager.AppSettings[ "Insightly.apiKey" ];
+      //private readonly ObjectCache cache;
+      //private CacheItemPolicy StandardPolicy()
+      //{
+      //   return new CacheItemPolicy() {AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10)};
+      //}
       private string Resource { get; set; }
 
-      public InsightlyService(string key)
+      public InsightlyService()
       {
-         ApiKey = key;
-         cache = MemoryCache.Default;
+         //cache = MemoryCache.Default;
       }
 
-      public IInsightlyService With(string resource)
+      public IInsightlyServiceWithResource With( string resource )
       {
          this.Resource = resource;
          return this;
       }
 
-      public IEnumerable<IInsightlyObject> GetAll<IInsightlyObject>()
+      public IInsightlyResponse<IEnumerable<IInsightlyObject>> GetAll<IInsightlyObject>()
       {
-         return GetRequestCached<IEnumerable<IInsightlyObject>>(this.Resource) as IEnumerable<IInsightlyObject>;
+         return GetRequestCached<IEnumerable<IInsightlyObject>>( this.Resource );
       }
 
-      public IInsightlyObject Create(IInsightlyObject data)
+      public IInsightlyResponse<IInsightlyObject> Create( IInsightlyObject data )
       {
-         if (data == null)
+         if( data == null )
             throw new ArgumentNullException(nameof(data));
-         cache.Remove("Contacts");
+         //cache.Remove("Contacts");
          return DoRequest<IInsightlyObject>(this.Resource, "POST", data).Result;
       }
 
-      public IInsightlyObject Get<IInsightlyObject>(int id)
+      public IInsightlyResponse<IInsightlyObject> Get<IInsightlyObject>( int id )
       {
-         return (IInsightlyObject) GetRequestCached<IInsightlyObject>(this.Resource + id.ToString());
+         return GetRequestCached<IInsightlyObject>(this.Resource + id.ToString());
       }
 
-      // TODO: fix caching issue
-      // TODO: use, and test
-      public IInsightlyObject Update<IInsightlyObject>(IInsightlyObject data)
+      public IInsightlyResponse<IInsightlyObject> Update<IInsightlyObject>( IInsightlyObject data )
       {
-         throw new NotImplementedException();
-         if (data == null)
+         if( data == null )
             throw new ArgumentNullException(nameof(data));
-
-         var response = DoRequest<IInsightlyObject>(this.Resource, "PUT", data).Result;
-         if (response == null)
-            return default(IInsightlyObject);
-
          //cache.Set("Contacts/" + response.Id, response, StandardPolicy());
-         cache.Remove("Contacts");
+         //cache.Remove("Contacts");
+         return DoRequest<IInsightlyObject>(this.Resource, "PUT", data).Result;
 
-         return response;
       }
 
-      // TODO: implement, use, and test
-      public bool Delete()
+      public IInsightlyResponse<bool> Delete(int id)
       {
-         throw new NotImplementedException();
+         return DoRequest<bool>( this.Resource + id.ToString(), "DELETE", null ).Result;
       }
 
-      public object GetRequestCached<T>( string url )
+      public IInsightlyResponse<T> GetRequestCached<T>( string url )
       {
-         if( cache[ url ] == null )
-         {
-            cache.Set(url, DoRequest<T>(url, "GET", null).Result, StandardPolicy());
-         }
-         return cache[ url ];
+         return DoRequest<T>( url, "GET", null ).Result;
+         //if( cache[ url ] == null )
+         //{
+         //   cache.Set(url, DoRequest<T>(url, "GET", null).ResponseData, StandardPolicy());
+         //}
+         //return cache[ url ];
       }
 
-      public async Task<T> DoRequest<T>( string url, string method, object body )
+      public async Task<IInsightlyResponse<T>> DoRequest<T>( string url, string method, object body )
       {
-         var request = Authorise(url);
-         var response = default(T);
+         IInsightlyResponse<T> result;
          try
          {
+            var request = Authorise(url);
+            Task<HttpResponseMessage> response;
+            T responseData;
             switch( method.ToLower() )
             {
                case "post":
                   if( body == null )
                      throw new ArgumentNullException(nameof(body));
-                  response = await request.PostJsonAsync(body).ReceiveJson<T>().ConfigureAwait(false);
+                  response = request.PostJsonAsync( body );
+                  responseData = await response.ReceiveJson<T>().ConfigureAwait(false);
                   break;
                case "get":
-                  response = await request.GetJsonAsync<T>().ConfigureAwait(false);
+                   response = request.GetAsync();
+                   responseData = await response.ReceiveJson<T>().ConfigureAwait( false );
                   break;
                case "put":
                   if( body == null )
                      throw new ArgumentNullException(nameof(body));
-                  response = await request.PutJsonAsync(body).ReceiveJson<T>().ConfigureAwait(false);
+                  response = request.PutJsonAsync( body );
+                  responseData = await response.ReceiveJson<T>().ConfigureAwait( false );
                   break;
+               case "delete":
+                  response = request.DeleteAsync();
+                  responseData = default(T);
+                  await response.ConfigureAwait(false);
+                  break;
+               default:
+                  throw new ArgumentException(nameof(method));
             }
+            result = new InsightlyResponse<T>((int) response.Result.StatusCode, responseData);
          }
          catch
          {
+            result = new InsightlyResponse<T>( 500, default(T) );
          }
-         return response;
+         return result;
       }
 
       public FlurlClient Authorise( string path )
       {
-         var request = _apiUri + path;
+         var request = InsightlyUri + path;
          return request.WithBasicAuth(ApiKey, "");
       }
    }

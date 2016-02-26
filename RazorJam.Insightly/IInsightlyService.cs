@@ -22,15 +22,19 @@
    using System.Threading.Tasks;
    using System.Collections.Generic;
 
+   public interface IInsightlyServiceWithResource
+   {
+      IInsightlyResponse<IEnumerable<IInsightlyObject>> GetAll<IInsightlyObject>();
+      IInsightlyResponse<IInsightlyObject> Create( IInsightlyObject data );
+      IInsightlyResponse<IInsightlyObject> Get<IInsightlyObject>( int id );
+      IInsightlyResponse<IInsightlyObject> Update<IInsightlyObject>( IInsightlyObject data );
+      IInsightlyResponse<bool> Delete( int id );
+   }
+
    public interface IInsightlyService
    {
-      object GetRequestCached<T>( string url );
-      Task<T> DoRequest<T>( string url, string method, object body );
-      IInsightlyService With( string resource );
-      IEnumerable<IInsightlyObject> GetAll<IInsightlyObject>();
-      IInsightlyObject Create( IInsightlyObject data );
-      IInsightlyObject Get<IInsightlyObject>(int id);
-      IInsightlyObject Update<IInsightlyObject>( IInsightlyObject data );
-      bool Delete();
+      IInsightlyResponse<T> GetRequestCached<T>( string url );
+      Task<IInsightlyResponse<T>> DoRequest<T>( string url, string method, object body );
+      IInsightlyServiceWithResource With( string resource );
    }
 }
