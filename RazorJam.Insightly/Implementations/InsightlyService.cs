@@ -31,16 +31,16 @@ namespace RazorJam.Insightly.Implementations
    {
       private const string InsightlyUri = "https://api.insight.ly/v2.1/";
       private string ApiKey => ConfigurationManager.AppSettings[ "Insightly.apiKey" ];
-      //private readonly ObjectCache cache;
-      //private CacheItemPolicy StandardPolicy()
-      //{
-      //   return new CacheItemPolicy() {AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10)};
-      //}
+      private readonly ObjectCache cache;
+      private CacheItemPolicy StandardPolicy()
+      {
+         return new CacheItemPolicy() { AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10) };
+      }
       private string Resource { get; set; }
 
       public InsightlyService()
       {
-         //cache = MemoryCache.Default;
+         cache = MemoryCache.Default;
       }
 
       public IInsightlyServiceWithResource With( string resource )
@@ -58,8 +58,10 @@ namespace RazorJam.Insightly.Implementations
       {
          if( data == null )
             throw new ArgumentNullException(nameof(data));
-         //cache.Remove("Contacts");
-         return DoRequest<IInsightlyObject>(this.Resource, "POST", data).Result;
+         var response = DoRequest<IInsightlyObject>(this.Resource, "POST", data).Result;
+         if( response.ResponseStatus() == 200 )
+            cache.Remove( this.Resource );
+         return response;
       }
 
       public IInsightlyResponse<IInsightlyObject> Get<IInsightlyObject>( int id )
@@ -71,25 +73,30 @@ namespace RazorJam.Insightly.Implementations
       {
          if( data == null )
             throw new ArgumentNullException(nameof(data));
-         //cache.Set("Contacts/" + response.Id, response, StandardPolicy());
-         //cache.Remove("Contacts");
-         return DoRequest<IInsightlyObject>(this.Resource, "PUT", data).Result;
-
+         var response = DoRequest<IInsightlyObject>(this.Resource, "PUT", data).Result;
+         if( response.ResponseStatus() == 200 )
+         {
+            //cache.Set( this.Resource + response.ResponseData().Id(), response, StandardPolicy() );
+            cache.Remove(this.Resource);
+         }
+         return response;
       }
 
       public IInsightlyResponse<bool> Delete(int id)
       {
-         return DoRequest<bool>( this.Resource + id.ToString(), "DELETE", null ).Result;
+         var response = DoRequest<bool>( this.Resource + id.ToString(), "DELETE", null ).Result;
+         if( response.ResponseStatus() == 202 )
+            cache.Remove(this.Resource + id.ToString());
+         return response;
       }
 
       public IInsightlyResponse<T> GetRequestCached<T>( string url )
       {
-         return DoRequest<T>( url, "GET", null ).Result;
-         //if( cache[ url ] == null )
-         //{
-         //   cache.Set(url, DoRequest<T>(url, "GET", null).ResponseData, StandardPolicy());
-         //}
-         //return cache[ url ];
+         if( cache[ url ] == null )
+         {
+            cache.Set(url, DoRequest<T>(url, "GET", null).Result, StandardPolicy());
+         }
+         return (IInsightlyResponse<T>) cache[ url ];
       }
 
       public async Task<IInsightlyResponse<T>> DoRequest<T>( string url, string method, object body )

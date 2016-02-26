@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInsightlyObject.cs" />
+    <Compile Include="IInsightlyResponse.cs" />
     <Compile Include="Implementations\Address.cs" />
     <Compile Include="Implementations\Comment.cs" />
     <Compile Include="Implementations\Contact.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Implementations\FileAttachment.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IInsightlyService.cs" />
+    <Compile Include="Implementations\InsightlyResponse.cs" />
     <Compile Include="Implementations\OrganizationDate.cs" />
     <Compile Include="Implementations\EmailLink.cs" />
     <Compile Include="Implementations\FileCategory.cs" />
