@@ -17,6 +17,7 @@
  * limitations under the License.
  */
 
+using RazorJam.Insightly.Models;
 namespace RazorJam.Insightly.Infrastructure
 {
    public static class Resources
@@ -49,5 +50,41 @@ namespace RazorJam.Insightly.Infrastructure
       public const string Teams = "Teams/";
       public const string TeamMembers = "TeamMembers/";
       public const string Users = "Users/";
+
+      public static string Get<T>() where T : IInsightlyObject
+      {
+         var type = typeof(T);
+
+         if (type == typeof(Comment)) return Comments;
+         if (type == typeof(Contact)) return Contacts;
+         if (type == typeof(Country)) return Countries;
+         if (type == typeof(Currency)) return Currencies;
+         if (type == typeof(CustomField)) return CustomFields;
+         if (type == typeof(Email)) return Emails;
+         if (type == typeof(Event)) return Events;
+         if (type == typeof(FileAttachment)) return FileAttachments;
+         if (type == typeof(FileCategory)) return FileCategories;
+         if (type == typeof(Lead)) return Leads;
+         if (type == typeof(LeadSource)) return LeadSources;
+         if (type == typeof(LeadStatus)) return LeadStatuses;
+         if (type == typeof(Note)) return Notes;
+         if (type == typeof(Opportunity)) return Opportunities;
+         if (type == typeof(OpportunityCategory)) return OpportunityCategories;
+         if (type == typeof(OpportunityStateReason)) return OpportunityStateReasons;
+         if (type == typeof(Organisation)) return Organisations;
+         if (type == typeof(Pipeline)) return Pipelines;
+         if (type == typeof(PipelineStage)) return PipelineStages;
+         if (type == typeof(Project)) return Projects;
+         if (type == typeof(ProjectCategory)) return ProjectCategories;
+         if (type == typeof(Relationship)) return Relationships;
+         if (type == typeof(Tag)) return Tags;
+         if (type == typeof(Task)) return Tasks;
+         if (type == typeof(TaskCategory)) return TaskCategories;
+         if (type == typeof(Team)) return Teams;
+         if (type == typeof(TeamMember)) return TeamMembers;
+         if (type == typeof(User)) return Users;
+
+         return null;
+      }
    }
 }
