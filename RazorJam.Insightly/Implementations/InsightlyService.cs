@@ -22,13 +22,14 @@
       //   cache = MemoryCache.Default;
       //}
 
-      public IInsightlyServiceWithResource<T> With<T>()
+      public IInsightlyServiceWithResource<T> With<T>(bool beta = false)
          where T : IInsightlyObject
       {
-         //this.Resource = resource;
+         var uri = beta ? "https://api.insight.ly/v2.2/" : "https://api.insight.ly/v2.1/";
          return new InsightlyServiceWithResource<T>()
          {
-            Resource = Resources.Get<T>()
+            Resource = Resources.Get<T>(),
+            InsightlyUri = uri
          };
       }
    }
@@ -36,9 +37,9 @@
    public class InsightlyServiceWithResource<T> : IInsightlyServiceWithResource<T>
       where T : IInsightlyObject
    {
-      private const string InsightlyUri = "https://api.insight.ly/v2.1/";
       private string ApiKey = ConfigurationManager.AppSettings["Insightly.apiKey"];
 
+      public string InsightlyUri = "https://api.insight.ly/v2.1/";
       public string Resource { get; set; }
 
       //public IInsightlyResponse<T> GetRequestCached<T>( string url )

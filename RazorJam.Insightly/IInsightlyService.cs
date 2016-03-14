@@ -16,6 +16,6 @@
    {
       //IInsightlyResponse<T> GetRequestCached<T>( string url );
       //Task<IInsightlyResponse<T>> DoRequest<T>(string url, string method, object body);
-      IInsightlyServiceWithResource<T> With<T>() where T : IInsightlyObject;
+      IInsightlyServiceWithResource<T> With<T>(bool beta = false) where T : IInsightlyObject;
    }
 }
