@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/razorjam/Insightly.Net/wiki</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>RazorJam.Insightly.Net is a fluent, cached wrapper service for the Insightly REST-based API v2.1.. Read the wiki here: https://github.com/razorjam/Insightly.Net/wiki </releaseNotes>
+    <copyright>There is no copyright!</copyright>
+    <tags>razor jam razorjam insightly api</tags>
+  </metadata>
+</package>

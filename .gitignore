@@ -1,0 +1,5 @@
+#gitignore
+.vs/*
+RazorJam.Insightly/bin/*
+RazorJam.Insightly/obj/*
+RazorJam.Insightly/.vs/*
